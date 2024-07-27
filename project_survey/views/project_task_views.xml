@@ -1,0 +1,34 @@
+<odoo>
+
+    <record model="ir.ui.view" id="project_task_cudio_survey_form">
+      <field name="name">project.task.form.surveys</field>
+      <field name="model">project.task</field>
+      <field name="inherit_id" ref="project.view_task_form2"/>
+      <field name="arch" type="xml">
+
+          <xpath expr="//field[@name='tag_ids']" position="after">
+            <field name="survey_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+          </xpath>
+
+          <xpath expr="//page[@name='sub_tasks_page']" position="after">
+          <page name="Survey_User_inputs" string="costumer surveys inputs" invisible="not project_id">
+            <field name="user_survey_input_ids">
+                <tree string="Survey User inputs" decoration-muted="test_entry == True" create="false">
+                    <field name="create_date"/>
+                    <field name="survey_id"/>
+                    <field name="nickname" optional="hide"/>
+                    <field name="partner_id" optional="show"/>
+                    <field name="email" optional="show"/>
+                    <field name="attempts_number"/>
+                    <field name="deadline"/>
+                    <field name="test_entry" column_invisible="True"/>
+                    <field name="scoring_success"/>
+                    <field name="scoring_percentage"/>
+                    <field name="state" widget="badge" decoration-success="state == 'done'" decoration-warning="state == 'new'" decoration-info="state == 'in_progress'"/>
+                </tree>
+            </field>
+          </page>
+        </xpath>
+      </field>
+    </record>
+</odoo>
