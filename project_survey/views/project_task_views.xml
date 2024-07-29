@@ -6,14 +6,18 @@
       <field name="inherit_id" ref="project.view_task_form2"/>
       <field name="arch" type="xml">
 
+          <xpath expr="//field[@name='stage_id']" position="after">
+              <button name="action_send_survey_from_task" string="Send Survey" type="object" class="oe_highlight" invisible="not active"/>
+          </xpath>
+
           <xpath expr="//field[@name='tag_ids']" position="after">
-            <field name="survey_ids" widget="many2many_tags" options="{'color_field': 'color', 'no_create_edit': True}"/>
+            <field name="survey_id"/>
           </xpath>
 
           <xpath expr="//page[@name='sub_tasks_page']" position="after">
-          <page name="Survey_User_inputs" string="costumer surveys inputs" invisible="not project_id">
-            <field name="user_survey_input_ids">
-                <tree string="Survey User inputs" decoration-muted="test_entry == True" create="false">
+          <page name="Survey_User_inputs" string="costumer survey inputs">
+            <field name="user_input_ids">
+                <tree string="Survey User inputs" create="false">
                     <field name="create_date"/>
                     <field name="survey_id"/>
                     <field name="nickname" optional="hide"/>
